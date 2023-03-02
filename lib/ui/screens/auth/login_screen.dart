@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrtodo/ui/screens/hr/task_list.dart';
+import 'package:hrtodo/ui/screens/manager/assignment_list.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
 import 'package:hrtodo/ui/widgets/base/input.dart';
 import 'package:hrtodo/utils/app_colors.dart';
@@ -57,9 +58,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 child: Button(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => const TaskList()
-                    ));
+                    if (_usernameInput.text == "hr") {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => const TaskList()
+                      ));
+                    } else {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => const AssignmentList()
+                      ));
+                    }
                   },
                   label: AppLocalizations.of(context).login,
                 ),
