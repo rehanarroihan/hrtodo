@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:hrtodo/screens/hr/task_list.dart';
+import 'package:hrtodo/ui/screens/hr/task_list.dart';
+import 'package:hrtodo/ui/widgets/base/button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -56,13 +57,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
               Container(
                 width: double.infinity,
-                child: ElevatedButton(
+                child: Button(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
                       builder: (context) => TaskList()
                     ));
                   },
-                  child: Text('Logins')
+                  label: 'Login',
                 ),
               )
             ],

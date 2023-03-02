@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hrtodo/screens/auth/login_screen.dart';
+import 'package:hrtodo/ui/screens/auth/login_screen.dart';
 import 'package:yaru/yaru.dart';
 
 class MainApp extends StatelessWidget {

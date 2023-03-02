@@ -10,9 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  yaru: ^0.5.5
   flutter_bloc: ^8.1.2
+  equatable: ^2.0.3
+  yaru: ^0.5.5
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
