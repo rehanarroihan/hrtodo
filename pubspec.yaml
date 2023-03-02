@@ -10,10 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
   yaru: ^0.5.5
-  intl: ^0.18.0
   fluttertoast: ^8.2.1
 
 dev_dependencies:
@@ -22,4 +23,5 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  generate: true
   uses-material-design: true

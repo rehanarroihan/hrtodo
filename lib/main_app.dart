@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrtodo/ui/screens/auth/login_screen.dart';
 import 'package:yaru/yaru.dart';
 
@@ -13,7 +14,9 @@ class MainApp extends StatelessWidget {
       ),
       builder: (context, yaru, child) {
         return MaterialApp(
-          title: 'Flutter Demo',
+          title: 'HR To-do List',
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           theme: yaru.theme,
           darkTheme: yaru.darkTheme,
           home: const LoginScreen(),

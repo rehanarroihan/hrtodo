@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrtodo/ui/screens/hr/task_list.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
 import 'package:hrtodo/ui/widgets/base/input.dart';
@@ -25,9 +26,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Login',
-                style: TextStyle(
+              Text(
+                AppLocalizations.of(context).login,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.w500
                 ),
@@ -60,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       builder: (context) => const TaskList()
                     ));
                   },
-                  label: 'Login',
+                  label: AppLocalizations.of(context).login,
                 ),
               )
             ],
