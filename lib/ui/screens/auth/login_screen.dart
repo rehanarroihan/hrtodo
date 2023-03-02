@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hrtodo/ui/screens/hr/task_list.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
+import 'package:hrtodo/ui/widgets/base/input.dart';
+import 'package:hrtodo/utils/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,10 +12,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameInput = TextEditingController();
+  final TextEditingController _passwordInput = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfffafafa),
+      backgroundColor: AppColors.pageBackground,
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -27,40 +32,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontWeight: FontWeight.w500
                 ),
               ),
+
               const SizedBox(height: 24),
 
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Username",
-                  labelText: "Username",
-                  prefix: Padding(
-                    padding: EdgeInsets.only(right: 5),
-                    child: Icon(
-                      Icons.person,
-                      size: 16,
-                    ),
-                  ),
-                  prefixIconConstraints: BoxConstraints(minHeight: 100),
-                )
+              Input(
+                controller: _usernameInput,
+                label: 'Username',
+                hint: 'Input username',
               ),
 
               const SizedBox(height: 16),
 
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: "Password",
-                )
+              Input(
+                controller: _passwordInput,
+                keyboardType: TextInputType.visiblePassword,
+                label: 'Password',
+                hint: 'Input password',
               ),
 
               const SizedBox(height: 12),
 
-              Container(
+              SizedBox(
                 width: double.infinity,
                 child: Button(
                   onPressed: () {
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => TaskList()
+                      builder: (context) => const TaskList()
                     ));
                   },
                   label: 'Login',

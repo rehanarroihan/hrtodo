@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
 import 'package:hrtodo/ui/widgets/base/input.dart';
+import 'package:hrtodo/utils/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class TaskList extends StatefulWidget {
@@ -17,6 +18,7 @@ class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.pageBackground,
       appBar: AppBar(
         title: const Text('Task List'),
       ),
@@ -98,13 +100,13 @@ class _TaskListState extends State<TaskList> {
                       controller: _dateInput,
                       label: 'Date',
                       hint: 'Pick date',
-                      keyboardType: TextInputType.visiblePassword,
+                      prefixIcon: Icons.calendar_month_rounded,
                       onClick: () async {
                         final DateTime? pickedDate = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2025),
+                          firstDate: DateTime.now().subtract(const Duration(days: 0)),
+                          lastDate: DateTime(2100),
                         );
                         if (pickedDate != null) {
                           final DateTime fullResult = DateTime(

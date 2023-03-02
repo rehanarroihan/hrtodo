@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yaru/yaru.dart';
 
-class Input extends StatelessWidget {
+class Input extends StatefulWidget {
   final TextEditingController controller;
   final String label;
   final String? hint;
@@ -25,8 +26,15 @@ class Input extends StatelessWidget {
   });
 
   @override
+  State<Input> createState() => _InputState();
+}
+
+class _InputState extends State<Input> {
+  bool _obscurePasswordText = true;
+
+  @override
   Widget build(BuildContext context) {
-    if (onClick != null) {
+    if (widget.onClick != null) {
       return Stack(
         children: [
           _buildTextFormField(context),
@@ -34,7 +42,7 @@ class Input extends StatelessWidget {
             height: 40,
             width: double.infinity,
             child: GestureDetector(
-              onTap: () => onClick!.call(),
+              onTap: () => widget.onClick!.call(),
             ),
           )
         ],
@@ -45,33 +53,76 @@ class Input extends StatelessWidget {
   }
 
   Widget _buildTextFormField(context) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: maxLines != null ? TextInputType.multiline : keyboardType,
-      maxLines: maxLines,
-      textCapitalization: textCapitalization ?? TextCapitalization.none,
-      readOnly: onClick != null,
-      decoration: InputDecoration(
-        hintText: hint,
-        labelText: label,
-        hintStyle: const TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-        ),
-        prefix: prefixIcon != null
-            ? Padding(
+    if (widget.keyboardType == TextInputType.visiblePassword) {
+      return TextFormField(
+        controller: widget.controller,
+        keyboardType: TextInputType.visiblePassword,
+        obscureText: _obscurePasswordText,
+        readOnly: widget.onClick != null,
+        decoration: InputDecoration(
+          hintText: widget.hint,
+          labelText: widget.label,
+          hintStyle: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+          prefix: widget.prefixIcon != null
+              ? Padding(
                 padding: const EdgeInsets.only(right: 5),
                 child: Icon(
-                  prefixIcon,
+                  widget.prefixIcon,
                   size: 16,
                 ),
               )
-            : null,
-        prefixIconConstraints: prefixIcon != null
-            ? const BoxConstraints(minHeight: 100)
-            : null,
-        suffixIcon: suffixWidget ?? Container(width: 2)
-      ),
-    );
+              : null,
+          prefixIconConstraints: widget.prefixIcon != null
+              ? const BoxConstraints(minHeight: 100)
+              : null,
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                _obscurePasswordText = !_obscurePasswordText;
+              });
+            },
+            icon: Icon(_obscurePasswordText
+                ? Icons.visibility_off
+                : Icons.visibility,
+              color: _obscurePasswordText
+                  ? Colors.grey
+                  : YaruVariant.ubuntuMateGreen.color,
+            ),
+          ),
+        ),
+      );
+    } else {
+      return TextFormField(
+        controller: widget.controller,
+        keyboardType: widget.maxLines != null ? TextInputType.multiline : widget.keyboardType,
+        maxLines: widget.maxLines,
+        textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
+        readOnly: widget.onClick != null,
+        decoration: InputDecoration(
+          hintText: widget.hint,
+          labelText: widget.label,
+          hintStyle: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
+          prefix: widget.prefixIcon != null
+              ? Padding(
+                padding: const EdgeInsets.only(right: 5),
+                child: Icon(
+                  widget.prefixIcon,
+                  size: 16,
+                ),
+              )
+              : null,
+          prefixIconConstraints: widget.prefixIcon != null
+              ? const BoxConstraints(minHeight: 100)
+              : null,
+          suffixIcon: widget.suffixWidget ?? Container(width: 2)
+        ),
+      );
+    }
   }
 }
