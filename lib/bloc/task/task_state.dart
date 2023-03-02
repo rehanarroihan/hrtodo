@@ -8,3 +8,9 @@ abstract class TaskState extends Equatable {
 }
 
 class TaskInitial extends TaskState {}
+
+class CreateTaskInit extends TaskState {}
+
+class CreateTaskSuccessful extends TaskState {}
+
+class CreateTaskFailed extends TaskState {}

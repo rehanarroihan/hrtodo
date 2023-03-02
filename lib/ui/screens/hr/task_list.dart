@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hrtodo/bloc/task/task_cubit.dart';
+import 'package:hrtodo/models/task.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
 import 'package:hrtodo/ui/widgets/base/input.dart';
 import 'package:hrtodo/utils/app_colors.dart';
+import 'package:hrtodo/utils/show_flutter_toast.dart';
 import 'package:intl/intl.dart';
 
 class TaskList extends StatefulWidget {
@@ -12,23 +16,55 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
+  late TaskCubit _taskCubit;
+
   final TextEditingController _taskNameInput = TextEditingController();
   final TextEditingController _dateInput = TextEditingController();
+  DateTime? _pickedDate;
+
+  @override
+  void initState() {
+    _taskCubit = BlocProvider.of<TaskCubit>(context);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.pageBackground,
-      appBar: AppBar(
-        title: const Text('Task List'),
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.fromLTRB(16, 16, 16, 20),
-        child: Button(
-          onPressed: () => showCreateTaskDialog(),
-          label: 'Create New Task',
-        ),
+    return BlocListener(
+      bloc: _taskCubit,
+      listener: (contex, state) {
+        if (state is CreateTaskSuccessful) {
+          showFlutterToast("Task created");
+          Navigator.pop(context);
+        }
+      },
+      child: BlocBuilder(
+        bloc: _taskCubit,
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: AppColors.pageBackground,
+            appBar: AppBar(
+              title: const Text('Task List'),
+            ),
+            body: ListView.builder(
+              itemCount: _taskCubit.taskList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  child: Text(_taskCubit.taskList[index].name),
+                );
+              },
+            ),
+            bottomNavigationBar: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+              child: Button(
+                onPressed: () => showCreateTaskDialog(),
+                label: 'Create New Task',
+              ),
+            ),
+          );
+        }
       ),
     );
   }
@@ -117,8 +153,10 @@ class _TaskListState extends State<TaskList> {
                             pickedDate.minute,
                           );
 
-                          _dateInput.text = DateFormat('dd MMMM yyyy').format(fullResult);
-                          setState(() {});
+                          setState(() {
+                            _dateInput.text = DateFormat('dd MMMM yyyy').format(fullResult);
+                            _pickedDate = fullResult;
+                          });
                         } else {
                           return;
                         }
@@ -131,7 +169,10 @@ class _TaskListState extends State<TaskList> {
                       width: double.infinity,
                       child: Button(
                         onPressed: () {
-
+                          _taskCubit.createTask(Task(
+                            name: _taskNameInput.text,
+                            date: _pickedDate!
+                          ));
                         },
                         label: 'Create Task',
                       ),
