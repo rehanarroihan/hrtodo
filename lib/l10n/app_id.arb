@@ -1,3 +1,7 @@
 {
-  "login": "Masuk"
+  "login": "Masuk",
+  "inputUsername": "Masukkan username",
+  "inputPassword": "Masukkan password",
+  "invalidLogin": "Username atau password salah",
+  "loading": "Silahkan tunggu..."
 }
