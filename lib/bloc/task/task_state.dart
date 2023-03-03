@@ -14,3 +14,9 @@ class CreateTaskInit extends TaskState {}
 class CreateTaskSuccessful extends TaskState {}
 
 class CreateTaskFailed extends TaskState {}
+
+class UpdateTaskInit extends TaskState {}
+
+class UpdateTaskSuccessful extends TaskState {}
+
+class UpdateTaskFailed extends TaskState {}

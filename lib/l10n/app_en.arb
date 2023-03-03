@@ -3,5 +3,10 @@
   "inputUsername": "Input username",
   "inputPassword": "Input password",
   "invalidLogin": "Invalid username or password",
-  "loading": "Please wait..."
+  "loading": "Please wait...",
+
+  "noTaskCreated": "Currently no task created",
+  "noTaskCreatedDescription": "create first task for managers",
+  "noAssignedTask": "Woohoo, you're all done!",
+  "noAssignedTaskDescription": "keep calm"
 }

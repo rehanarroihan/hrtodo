@@ -3,5 +3,10 @@
   "inputUsername": "Masukkan username",
   "inputPassword": "Masukkan password",
   "invalidLogin": "Username atau password salah",
-  "loading": "Silahkan tunggu..."
+  "loading": "Silahkan tunggu...",
+
+  "noTaskCreated": "Belum ada tugas yang dibuat",
+  "noTaskCreatedDescription": "buat tugas pertama anda",
+  "noAssignedTask": "Yeiy, sudah selesai semua!",
+  "noAssignedTaskDescription": "waktunya santai"
 }

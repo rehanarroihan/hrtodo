@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yaru/yaru.dart';
+import 'package:hrtodo/utils/app_colors.dart';
 
 class Input extends StatefulWidget {
   final TextEditingController controller;
@@ -89,7 +89,7 @@ class _InputState extends State<Input> {
                 : Icons.visibility,
               color: _obscurePasswordText
                   ? Colors.grey
-                  : YaruVariant.ubuntuMateGreen.color,
+                  : AppColors.primaryColor,
             ),
           ),
         ),

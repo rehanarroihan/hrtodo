@@ -1,6 +1,15 @@
+
+
 class Task {
+  String? id;
   String name;
   DateTime date;
+  bool checked;
 
-  Task({required this.name, required this.date});
+  Task({
+    this.id,
+    required this.name,
+    required this.date,
+    required this.checked
+  });
 }

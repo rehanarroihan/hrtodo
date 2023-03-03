@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hrtodo/bloc/task/task_cubit.dart';
 import 'package:hrtodo/models/task.dart';
 import 'package:hrtodo/ui/widgets/base/button.dart';
 import 'package:hrtodo/ui/widgets/base/input.dart';
+import 'package:hrtodo/ui/widgets/modules/empty_state.dart';
+import 'package:hrtodo/ui/widgets/modules/task_item.dart';
 import 'package:hrtodo/utils/app_colors.dart';
 import 'package:hrtodo/utils/show_flutter_toast.dart';
 import 'package:intl/intl.dart';
@@ -47,11 +50,26 @@ class _TaskListState extends State<TaskList> {
             appBar: AppBar(
               title: const Text('Task List'),
             ),
-            body: ListView.builder(
+            body: _taskCubit.taskList.isEmpty ? Center(
+              child: EmptyState(
+                imagePath: 'assets/illustrations/box_empty_state.png',
+                title: AppLocalizations.of(context).noTaskCreated,
+                description: AppLocalizations.of(context).noTaskCreatedDescription,
+              )
+            ) :
+            ListView.builder(
               itemCount: _taskCubit.taskList.length,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               itemBuilder: (context, index) {
                 return Container(
-                  child: Text(_taskCubit.taskList[index].name),
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: TaskItem(
+                    task: _taskCubit.taskList[index],
+                    disabled: false,
+                    onChanged: (bool? checked) {
+
+                    }
+                  ),
                 );
               },
             ),
@@ -171,7 +189,8 @@ class _TaskListState extends State<TaskList> {
                         onPressed: () {
                           _taskCubit.createTask(Task(
                             name: _taskNameInput.text,
-                            date: _pickedDate!
+                            date: _pickedDate!,
+                            checked: false
                           ));
                         },
                         label: 'Create Task',
