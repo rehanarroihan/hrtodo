@@ -5,12 +5,12 @@ Generated release apk can be downloaded in [this link](https://github.com/rehana
 
 ## User List
 
-Username: hr
-Password: hr
+Username: hr\
+Password: hr\
 Role: hr
 
-Username: manager
-Password: manager
+Username: manager\
+Password: manager\
 Role: manager
 
 ## Screenshot
